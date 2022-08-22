@@ -3,23 +3,24 @@
 
 <head>
     <title>tabel</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
     <br />
-    <div class="container box">
-        <h3 align="center">tabel</h3><br />
+    <div class="container">
+        <h3 align="center">Clients table</h3><br />
         <div class="panel panel-default">
-            <div class="panel-heading">Sample Data</div>
+
             <div class="panel-body">
                 <div id="message"></div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-dark table-striped table-bordered">
                         <thead>
                             <tr>
+                                <th>Id</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
@@ -33,9 +34,9 @@
                     </table>
                     {{ csrf_field() }}
                 </div>
+
             </div>
         </div>
-    </div>
 </body>
 
 </html>
@@ -52,6 +53,7 @@
                 success: function(data) {
                     var html = '';
                     html += '<tr>';
+                    html += '<td id="id"></td>';
                     html += '<td contenteditable id="name"></td>';
                     html += '<td contenteditable id="email"></td>';
                     html += '<td contenteditable id="phone"></td>';
@@ -59,6 +61,7 @@
                     html += '<td><button type="button" class="btn btn-success btn-xs" id="add">Add</button></td></tr>';
                     for (var count = 0; count < data.length; count++) {
                         html += '<tr>';
+                        html += '<td class="column_name" data-column_name="name" data-id="' + data[count].id + '">' + data[count].id + '</td>';
                         html += '<td contenteditable class="column_name" data-column_name="name" data-id="' + data[count].id + '">' + data[count].name + '</td>';
                         html += '<td contenteditable class="column_name" data-column_name="email" data-id="' + data[count].id + '">' + data[count].email + '</td>';
                         html += '<td contenteditable class="column_name" data-column_name="phone" data-id="' + data[count].id + '">' + data[count].phone + '</td>';
@@ -94,7 +97,7 @@
                     }
                 });
             } else {
-                $('#message').html("<div class='alert alert-danger'>Both Fields are required</div>");
+                $('#message').html("<div class='alert alert-danger'>All Fields are required</div>");
             }
         });
 
